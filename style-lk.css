@@ -1,0 +1,60 @@
+html, body {
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    color: black;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    height: 100%; /* Устанавливаем высоту для flex-контейнера */
+}
+
+body {
+    display: flex;
+    flex-direction: column; /* Вертикальное расположение элементов */
+}
+
+header{
+    padding-top: 10px;
+    margin: 0;
+    max-width: 1350px;
+    display: flex;
+    justify-content: space-between;
+   
+}
+ main {
+    padding-inline: 20px;
+    padding-top: 10px;
+    margin: 0 auto;
+    max-width: 1200px;
+    flex: 1; /* Контент занимает доступное пространство */
+}
+
+footer {
+    background-color: rgb(218, 1, 121);
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.toppannel {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    align-items: center;
+    width: 100%;
+}
+  
+nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+}
+  
+.modal.show {
+    display: block;
+}
+
+.modal-hidden {
+    display: none;
+}

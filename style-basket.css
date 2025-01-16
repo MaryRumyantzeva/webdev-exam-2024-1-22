@@ -1,0 +1,341 @@
+html, body {
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    color: black;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    height: 100%; /* Устанавливаем высоту для flex-контейнера */
+}
+
+body {
+    display: flex;
+    flex-direction: column; /* Вертикальное расположение элементов */
+}
+
+header{
+    padding-top: 10px;
+    margin: 0;
+    max-width: 1350px;
+    display: flex;
+    justify-content: space-between;
+   
+}
+ main {
+    padding-inline: 20px;
+    padding-top: 10px;
+    margin: 0 auto;
+    max-width: 1200px;
+    flex: 1; /* Контент занимает доступное пространство */
+}
+
+footer {
+    background-color: rgb(218, 1, 121);
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.toppannel {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    align-items: center;
+    width: 100%;
+}
+  
+nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+}
+  
+
+form {
+    width: 100%;
+}
+
+fieldset {
+    border: none;
+    width: 32%;
+}
+
+legend {
+    font-size: 24px;
+    margin-bottom: 30px;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+    font-size: 18px;
+}
+
+.podpiska {
+    font-size: 14px;
+    margin-top: 1px;
+    font-style: italic;
+    margin-bottom: 15px;
+}
+
+.title-order {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.form {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding: 20px;
+}
+
+.form-container {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 60px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="time"],
+input[type="date"],
+select,
+textarea {
+    width: 100%; 
+    padding: 10px; 
+    margin-bottom: 15px; 
+    border: 1px solid black; 
+    border-radius: 4px; 
+}
+
+textarea {
+    max-width: 96%;
+    max-height: 100%;
+}
+
+input[type="email"] {
+    margin-bottom: 5px;
+}
+
+.form-button { 
+    width: 40%;
+    background-color: white; 
+    padding: 10px 30px; 
+    border-width: thin; 
+    border-color: black;
+    border-radius: 2px;
+    cursor: pointer;
+    font-size: 16px; 
+    margin: 10px; 
+    color: white;
+    background-color: rgb(229, 137, 160);
+}
+
+.form-button:hover {
+    background-color: rgb(218, 1, 121);
+    color: white;
+}
+
+.modal {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(232, 255, 201);
+    border: 1px solid black;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    padding: 5px;    
+    text-align: center;   
+}
+
+#modal-text{
+    margin: 2px;
+}
+
+.modal-button {
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 10px 5px;
+    cursor: pointer;
+    margin-top: 5px;
+    font-size: 16px;
+}
+
+.modal-button:hover {
+    background-color: black;
+    color: white;
+}
+
+.modal.hidden-modal {
+    display: none;
+}
+
+.cart-item{
+    background-color: white;
+    border-radius: 35px;    
+    filter: drop-shadow(17px 19px 24px rgba(0, 0, 0, 0.13));
+    cursor: pointer;
+    width: 100%; /* Карточка занимает всю ширину ячейки */
+}
+.cart-items{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 30px;
+}
+.remove-item{
+    display: block;
+    width: 100%;
+    background-color: rgb(229, 137, 160);
+    color: white;
+    padding: 10px 30px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.remove-item:hover {
+    background-color: rgb(218, 1, 121);
+    color: white;
+}
+
+.good {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    overflow: hidden;
+    height: 100%; /* Устанавливаем фиксированную высоту карточки */
+    max-width: 100%; /* Ограничиваем ширину карточки */
+    padding: 10px;
+    margin: 10px;
+    background-color: white;
+    border-radius: 15px;
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.1));
+    text-align: center;
+}
+
+   
+.good:hover {
+    border: 2px solid rgb(218, 1, 121);
+}
+
+.good-img {
+    width: 100%;
+    height: 50%;
+    object-fit: contain;
+    border-radius: 35px;
+}
+
+.good-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 20px;
+    height: 100%; 
+    overflow: hidden; /* Убираем переполнение */
+    height: 40%;
+}
+
+.good-rating{
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.good-price{
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.good-title-rating {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.good-title {
+    font-size: 16px;
+    margin: 0;
+    word-wrap: break-word;
+    max-width: 80%;
+}
+
+.rating-stars {
+    display: inline-block;
+    align-items: center;
+    margin-top: 5px;
+    margin-right: 10px;
+}
+.rating-stars i {
+    font-size: 1rem;
+    color: gold;
+    margin-right: 2px;
+}
+
+.rating-stars .bi-star,
+.rating-stars .bi-star-fill,
+.rating-stars .bi-star-half {
+    font-size: 1rem; /* Размер звезд */
+    color: gold; /* Цвет закрашенной звезды */
+    margin-right: 2px;
+}
+
+.rating-stars .bi-star-half {
+    color: gold; /* Цвет для полузакрашенной звезды */
+}
+.original-price {
+    color: red;
+    text-decoration: line-through;
+}
+
+.discount-price {
+    color: black;
+    font-weight: bold;
+}
+.striked-price {
+    color: red;
+    text-decoration: line-through;
+    margin-right: 8px;
+}
+
+.discount-percentage {
+    font-size: 14px;
+    color: red;
+    margin-left: 8px;
+    font-weight: bold;
+}
+
+.discount-percent {
+    color: red;
+    font-size: 16px;
+    font-weight: bold;
+}
+.totalContainerSum{
+    font-family: "Roboto", sans-serif;
+    font-size: 20px;
+    color: black;
+    align-items: center;
+}
+.totalContainerDelivery{
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    color: grey;
+    align-items: center;
+}
