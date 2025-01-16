@@ -1,4 +1,4 @@
-const apiUrl = 'http://api.std-900.ist.mospolytech.ru/exam-2024-1/api/goods?api_key=74ca26d4-79b4-484e-a3a8-201b7d84a758';
+const apiUrl = 'https://edu.std-900.ist.mospolytech.ru/exam-2024-1/api/goods?api_key=74ca26d4-79b4-484e-a3a8-201b7d84a758';
 const apiKey = '74ca26d4-79b4-484e-a3a8-201b7d84a758';
 
 let goods = [];
