@@ -160,20 +160,16 @@ h1 {
 
 .cata-log {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
+    margin-bottom: 30px;
 }
 
 .goods {
     padding: 20px;
 }
 
-.cata-log {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    margin-bottom: 30px;
-}
+
 
 .category a {
     display: block;
@@ -194,6 +190,7 @@ h1 {
     filter: drop-shadow(17px 19px 24px rgba(0, 0, 0, 0.13));
     cursor: pointer;
     width: 100%; /* Карточка занимает всю ширину ячейки */
+    height: 650px;
 }
 
 .good:hover {
@@ -346,23 +343,41 @@ h1 {
 }
  
 
-@media (max-width: 1000px) {
-    .cata-log {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
 @media (max-width: 750px) {
-    .cata-log {
-        grid-template-columns: repeat(1, 1fr);
-    }
-
     .sidebar {
-        width: 100%;
+        width: 80%;
         margin-bottom: 20px;
+        margin: 0;
     }
 
     .main-content {
         width: 100%;
     }
+
+    .container {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .toppannel {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+    }
+
+    .toppannel>img {
+        margin-bottom: 30px;
+    }
+
+    .toppannel ul {
+        padding: 0;
+    }
+
+    #sort-select {
+        width: 80%;
+        margin: 20px auto 0 auto;
+    }
 }
+
