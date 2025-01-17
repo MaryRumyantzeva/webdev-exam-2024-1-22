@@ -7,9 +7,8 @@ function renderOrder(orders) {
     
     ordersContainer.innerHTML = "";
     for (const order of orders) {
-        // Загрузка товаров
         const goodsPromises = order.good_ids.map(id =>
-            fetch(`https://edu.std-900.ist.mospolytech.ru/exam-2024-1/api/goods/${id}?api_key=apiKey`)
+            fetch(`https://edu.std-900.ist.mospolytech.ru/exam-2024-1/api/goods/${id}?api_key=${apiKey}`)
                 .then(response => response.json())
                 .catch(err => {
                     console.error("Ошибка получения информации о товаре:", err);

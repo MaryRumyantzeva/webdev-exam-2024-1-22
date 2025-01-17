@@ -47,6 +47,14 @@ export function renderGoods(goods) {
             </div>
         `;
         categoryContainer.appendChild(goodDiv);
+        
+        const goodInCart = cart.find(cartGood => cartGood.id === good.id);
+        console.log(cart)
+        if (goodInCart) {
+            const button = goodDiv.querySelector('button');
+            button.classList.add('button-active');
+            goodDiv.classList.add('goods-active');
+        }
     });
 
     updateStars();
@@ -168,6 +176,9 @@ document.querySelector('.apply-button').addEventListener('click', () => {
     applyFiltersAndSort();
 });
 
+document.querySelector('#sort-select').addEventListener('change', () => {
+    applyFiltersAndSort();
+});
 
 document.querySelector('#load-more').addEventListener('click', () => {
     currentDisplayedGoods += 6;
@@ -192,6 +203,8 @@ function loadThings() {
         })
         .then(data => {
             goods = data;
+            const savedCart = localStorage.getItem('cart');
+            cart = JSON.parse(savedCart ?? '[]')
             populateSidebarCategories(goods);
             renderGoods(goods);
 
