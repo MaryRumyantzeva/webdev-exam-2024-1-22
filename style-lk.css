@@ -145,3 +145,7 @@ tr {
     background-color: black;
     color: white;
 }
+
+.modal-hidden {
+    display: none;
+}
