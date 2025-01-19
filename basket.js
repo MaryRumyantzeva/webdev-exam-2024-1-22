@@ -4,7 +4,8 @@ function loadCartFromLocalStorage() {
 }
 
 function totalSummary(cart) {
-    const totalSum = cart.reduce((p, c) => p + (c.discount_price ?? p.actual_price), 0)
+    cart ??= [];
+    const totalSum = cart.reduce((sum, currentGood) => sum + (currentGood.discount_price ?? currentGood.actual_price), 0)
     return totalSum
 }
 
@@ -69,7 +70,7 @@ function updateCartPage() {
     cartContainer.innerHTML = '';
     const cart = loadCartFromLocalStorage();
 
-    if (Object.keys(cart).length === 0) {
+    if (Object.keys(cart ?? {}).length === 0) {
         cartContainer.innerHTML = '<p>Корзина пуста. Перейдите в каталог, чтобы добавить товары.</p>';
     } else {
         Object.values(cart).forEach((item) => {
@@ -136,18 +137,14 @@ function updateCartPage() {
 
     const form = document.forms[0];
     form.addEventListener('submit', (event) => {
-    event.preventDefault();
-    const modal = document.getElementById("modal");
-    modal.classList.remove("hidden");
+        event.preventDefault();
+        const modal = document.getElementById("modal");
+        modal.classList.remove("hidden");
 
-    showModal("Заказ успешно оформлен");
-    return;
-
-  
-
-    
-
-})
+        showModal("Заказ успешно оформлен");
+        updateCartPage();
+        return;
+    })
 }
 
 const dateInput = document.querySelector('#date');
@@ -204,13 +201,11 @@ function saveOrder(order) {
 document.getElementById('submitbutton').addEventListener('click', (event) => {
     event.preventDefault();
 
-    
-
     const cart = loadCartFromLocalStorage();
     if (!cart || cart.length === 0) {
         alert('Корзина пуста. Добавьте товары перед оформлением заказа.');
         return;
-    }  
+    }
 
     const fullName = document.querySelector('#name').value;
     const phone = document.querySelector('#phone').value;
@@ -223,10 +218,9 @@ document.getElementById('submitbutton').addEventListener('click', (event) => {
     if (!fullName || !phone || !email || !deliveryAddress || !deliveryDate || !deliveryTime) {
         showModal("Заполните все поля!");
         return;
-    }    
+    }
 
     const order = {
-        id: Date.now(),
         fullName,
         phone,
         email,
@@ -236,7 +230,7 @@ document.getElementById('submitbutton').addEventListener('click', (event) => {
         comment,
         goods: cart,
         total: totalSummary(cart),
-        createdAt: new Date().toISOString(),
+        createdAt: new Date(),
     };
 
     let orders = JSON.parse(localStorage.getItem('orders')) || [];
@@ -244,7 +238,7 @@ document.getElementById('submitbutton').addEventListener('click', (event) => {
     localStorage.setItem('orders', JSON.stringify(orders));
 
     localStorage.removeItem('cart');  //?
-    // updateCartPage();
+    updateCartPage();
 
     showModal("Заказ успешно оформлен");
 });
@@ -252,7 +246,7 @@ document.getElementById('submitbutton').addEventListener('click', (event) => {
 document.getElementById('resetbutton').addEventListener('click', (event) => {
     event.preventDefault();
     localStorage.removeItem('cart');
-    
+
 
     document.querySelector('form').reset();
     const cartContainer = document.querySelector('.cart-items');
@@ -265,8 +259,7 @@ document.getElementById('resetbutton').addEventListener('click', (event) => {
         <p class="totalContainerSum">Итоговая стоимость: 0₽</p>
     `;
     showModal("Заказ успешно удалён");
-    
-
+    updateCartPage();
 });
 
 

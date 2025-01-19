@@ -46,27 +46,35 @@ function loadOrders() {
     const tableBody = document.getElementById('orders-table-body');
 
     orders.forEach((order, index) => {
-        const items = Array.isArray(order.items) ? order.items : [];
+        const items = order.goods;
         const row = document.createElement('tr');
-
+        const createdAt = new Date(order.createdAt)
         row.innerHTML = `
         <tbody>
             <tr>
                 <td>${index + 1}</td>
-                <td>${order.id}</td>
-                <td>${items.map(goods => goods.cart).join(', ')}</td>
+                <td>${createdAt.toLocaleString()}</td>
+                <td>${items.map(good => good.name).join('<br><br>')}</td>
                 <td>${order.total} ₽</td>
                 <td>${order.deliveryDate}, ${order.deliveryTime}</td>
                 <td>
-                    <button onclick="viewOrder(${index})">Просмотр</button>
-                    <button onclick="editOrder(${index})">Редактировать</button>
-                    <button onclick="openDeleteModal(${index})">Удалить</button>
+                    <button id="vieworder${index}">Просмотр</button>
+                    <button id="editorder${index}">Редактировать</button>
+                    <button id="deleteorder${index}">Удалить</button>
                 </td>
             </tr>
         </tbody>
         `;
         tableBody.appendChild(row);
+        const viewButton = document.querySelector(`#vieworder${index}`);
+        const editbutton = document.querySelector(`#editorder${index}`);
+        const deletebutton = document.querySelector(`#deleteorder${index}`);
+        viewButton.addEventListener('click', () => viewOrder(index));
+        editbutton.addEventListener('click', () => editOrder(index));
+        deletebutton.addEventListener('click', () => openDeleteModal(index));
     });
+    const closeViewModalButton = document.querySelector('#modal-view').querySelector('.close-button');
+    closeViewModalButton.addEventListener('click', () => closeModal('modal-view'));
 }
 
 function openDeleteModal(index) {
@@ -84,7 +92,7 @@ function viewOrder(index) {
     document.getElementById('address-view').innerText = order.address;
     document.getElementById('delivery-date-view').innerText = order.deliveryDate;
     document.getElementById('delivery-time-view').innerText = order.deliveryTime;
-    document.getElementById('goods-view').innerHTML = order.items.map(item => `< li > ${item.name}</li > `).join('');
+    document.getElementById('goods-view').innerHTML = Object.values(order).map(item => `< li > ${item.name}</li > `).join('');
     document.getElementById('goods-price').innerText = `${order.total} ₽`;
     document.getElementById('comment-view').innerText = order.comment;
 
@@ -114,9 +122,6 @@ function closeModal(modalId) {
     modal.classList.remove('modal-show');
     modal.classList.add('modal-hidden');
 }
-
-
-
 
 
 document.addEventListener('DOMContentLoaded', loadOrders);

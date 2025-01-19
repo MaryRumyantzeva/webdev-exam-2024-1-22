@@ -2,15 +2,14 @@
 <html lang="ru">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>Личный кабинет</title>
-    <link rel="stylesheet" href="style-lk.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <script type="module" src="./lk.js" defer></script>
+    <link rel="stylesheet" href="style-lk.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
         href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-        rel="stylesheet">
+        rel="stylesheet" />
 </head>
 
 <body>
@@ -19,8 +18,12 @@
             <img class="logo" src="img/log.jpg" alt="Логотип магазина" />
             <nav class="main-menu">
                 <ul>
-                    <li><a href="/index.html"><img class="panel" src="img/mainl.jpg"></a></li>
-                    <li><a href="/basket.html"><img class="panel" src="img/basket.jpg"></a></li>
+                    <li>
+                        <a href="/index.html"><img class="panel" src="img/mainl.jpg" /></a>
+                    </li>
+                    <li>
+                        <a href="/basket.html"><img class="panel" src="img/basket.jpg" /></a>
+                    </li>
                 </ul>
             </nav>
         </div>
@@ -32,20 +35,25 @@
 
         <div id="delete-modal" class="modal-hidden">
             <div class="modal-content">
-                <button class="close-button" onclick="openDeleteModal('delete-modal')">×</button>
+                <button class="close-button" onclick="openDeleteModal('delete-modal')">
+                    ×
+                </button>
                 <h2>Удаление заказа</h2>
                 <p>Вы уверены, что хотите удалить заказ?</p>
                 <div class="modal-buttons">
-                    <button class="modal-bt del-bt" onclick="closeModal('delete-modal')">Нет</button>
-                    <button class="modal-bt del-bt" onclick="confirmDeleteOrder()">Да</button>
+                    <button class="modal-bt del-bt" onclick="closeModal('delete-modal')">
+                        Нет
+                    </button>
+                    <button id="confirmdeleteorder" class="modal-bt del-bt" onclick="confirmDeleteOrder()">
+                        Да
+                    </button>
                 </div>
             </div>
         </div>
 
-
         <div id="modal-view" class="modal-hidden">
             <div class="modal-content">
-                <button class="close-button" onclick="closeModal('modal-view')">×</button>
+                <button class="close-button">X</button>
                 <h2>Просмотр заказа</h2>
 
                 <label for="date-order">Дата оформления</label>
@@ -58,7 +66,7 @@
                 <p id="phone-view"></p>
 
                 <label for="email-view">Email</label>
-                <p id="email-view"></p>                
+                <p id="email-view"></p>
 
                 <label for="address-view">Адрес доставки</label>
                 <p id="address-view"></p>
@@ -77,33 +85,34 @@
 
                 <label for="comment-view">Комментарий</label>
                 <p id="comment-view"></p>
-                <button class="close-button" onclick="closeModal('modal-view')">Ок</button>
+                <button class="close-button" onclick="closeModal('modal-view')">
+                    Ок
+                </button>
             </div>
-
         </div>
-
 
         <div id="edit-modal" class="modal-hidden">
             <div class="contentmodal">
-                <button class="close-button" onclick="closeModal('edit-modal')">×</button>
+                <button class="close-button" onclick="closeModal('edit-modal')">
+                    ×
+                </button>
                 <h2>Редактирование заказа</h2>
 
                 <form id="edit-form">
-
                     <label for="full-name-edit">Имя</label>
-                    <input type="text" id="full-name-edit" name="full_name" required>
+                    <input type="text" id="full-name-edit" name="full_name" required />
 
                     <label for="phone-edit">Номер телефона</label>
-                    <input type="tel" id="phone-edit" name="phone" required>
+                    <input type="tel" id="phone-edit" name="phone" required />
 
                     <label for="email-edit">Еmail</label>
-                    <input type="email" id="email-edit" name="email" required>
+                    <input type="email" id="email-edit" name="email" required />
 
                     <label for="address-edit">Адрес доставки</label>
-                    <input type="text" id="address-edit" name="delivery_address" required>
+                    <input type="text" id="address-edit" name="delivery_address" required />
 
                     <label for="delivery-date-edit">Дата доставки</label>
-                    <input type="date" id="delivery-date-edit" name="delivery_date" required>
+                    <input type="date" id="delivery-date-edit" name="delivery_date" required />
 
                     <label for="time">Время доставки</label>
                     <select id="delivery-time-edit">
@@ -122,21 +131,20 @@
                     <label for="comment-edit">Комментарий</label>
                     <textarea id="comment-edit" name="comment"></textarea>
 
-                    <button class="close-button" onclick="closeModal('modal-view')">Отмена</button>
-                    <button type="submit" id="edit-submit-button" class="modal-bt">Сохранить</button>
+                    <button class="close-button" onclick="closeModal('modal-view')">
+                        Отмена
+                    </button>
+                    <button type="submit" id="edit-submit-button" class="modal-bt">
+                        Сохранить
+                    </button>
                 </form>
             </div>
-
         </div>
-
-        
     </main>
     <footer id="contacts">
-        <p>
-            © 2025 Unicarrr
-        </p>
+        <p>© 2025 Unicarrr</p>
     </footer>
-
+    <script src="./lk.js"></script>
 </body>
 
 </html>
