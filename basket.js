@@ -143,6 +143,10 @@ function updateCartPage() {
     showModal("Заказ успешно оформлен");
     return;
 
+  
+
+    
+
 })
 }
 
@@ -189,6 +193,81 @@ dateInput.addEventListener('change', (event) => {
 timeOfTheDayInput.addEventListener('change', (event) => {
     updateDeliveryPrice()
 })
+
+function saveOrder(order) {
+    const existingOrders = JSON.parse(localStorage.getItem('orders')) || [];
+    existingOrders.push(order);
+    localStorage.setItem('orders', JSON.stringify(existingOrders));
+}
+
+
+document.getElementById('submitbutton').addEventListener('click', (event) => {
+    event.preventDefault();
+
+    
+
+    const cart = loadCartFromLocalStorage();
+    if (!cart || cart.length === 0) {
+        alert('Корзина пуста. Добавьте товары перед оформлением заказа.');
+        return;
+    }  
+
+    const fullName = document.querySelector('#name').value;
+    const phone = document.querySelector('#phone').value;
+    const email = document.querySelector('#email').value;
+    const deliveryAddress = document.querySelector('#address').value;
+    const deliveryDate = document.querySelector('#date').value;
+    const deliveryTime = document.querySelector('#delivery-time').value;
+    const comment = document.querySelector('#comment').value;
+
+    if (!fullName || !phone || !email || !deliveryAddress || !deliveryDate || !deliveryTime) {
+        showModal("Заполните все поля!");
+        return;
+    }    
+
+    const order = {
+        id: Date.now(),
+        fullName,
+        phone,
+        email,
+        deliveryAddress,
+        deliveryDate,
+        deliveryTime,
+        comment,
+        goods: cart,
+        total: totalSummary(cart),
+        createdAt: new Date().toISOString(),
+    };
+
+    let orders = JSON.parse(localStorage.getItem('orders')) || [];
+    orders.push(order);
+    localStorage.setItem('orders', JSON.stringify(orders));
+
+    localStorage.removeItem('cart');  //?
+    // updateCartPage();
+
+    showModal("Заказ успешно оформлен");
+});
+
+document.getElementById('resetbutton').addEventListener('click', (event) => {
+    event.preventDefault();
+    localStorage.removeItem('cart');
+    
+
+    document.querySelector('form').reset();
+    const cartContainer = document.querySelector('.cart-items');
+    cartContainer.innerHTML = `
+
+        <p>Корзина пуста. Перейдите в каталог, чтобы добавить товары.</p>
+    `;
+    const totalContainer = document.querySelector('.cart-total');
+    totalContainer.innerHTML = `
+        <p class="totalContainerSum">Итоговая стоимость: 0₽</p>
+    `;
+    showModal("Заказ успешно удалён");
+    
+
+});
 
 
 

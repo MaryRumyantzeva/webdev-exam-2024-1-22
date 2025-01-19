@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style-lk.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script type="module" src="./lk.js" defer></script>
     <link
         href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
         rel="stylesheet">
@@ -31,11 +32,11 @@
 
         <div id="delete-modal" class="modal-hidden">
             <div class="modal-content">
-                <button class="close-button" onclick="closeModal('delete-modal')">×</button>
+                <button class="close-button" onclick="openDeleteModal('delete-modal')">×</button>
                 <h2>Удаление заказа</h2>
                 <p>Вы уверены, что хотите удалить заказ?</p>
                 <div class="modal-buttons">
-                    <button class="modal-bt del-bt" onclick="closeModal()">Нет</button>
+                    <button class="modal-bt del-bt" onclick="closeModal('delete-modal')">Нет</button>
                     <button class="modal-bt del-bt" onclick="confirmDeleteOrder()">Да</button>
                 </div>
             </div>
