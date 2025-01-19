@@ -104,7 +104,7 @@
                 <h2>Редактирование заказа</h2>
                 
                 <form id="edit-form">
-                    <label for="date-order">Дата оформления</label>
+                    <label>Дата оформления</label>
                     <p id="date-order"></p>
                     <label for="full-name-edit">Имя</label><br>
                     <input type="text" id="full-name-edit" name="full-name-edit" required /><br>
@@ -123,10 +123,10 @@
 
                     <label for="time">Время доставки</label><br>
                     <select id="delivery-time-edit">
-                        <option value="08:00-12:00">08:00-12:00</option>
-                        <option value="12:00-14:00">12:00-14:00</option>
-                        <option value="14:00-18:00">14:00-18:00</option>
-                        <option value="18:00-22:00">18:00-22:00</option>
+                        <option value="09:00-12:00">09:00-12:00</option>
+                        <option value="12:00-15:00">12:00-15:00</option>
+                        <option value="15:00-18:00">15:00-18:00</option>
+                        <option value="18:00-21:00">18:00-21:00</option>
                     </select><br>
 
                     <label>Состав заказа:</label><br>
@@ -138,7 +138,7 @@
                     <label for="comment-edit">Комментарий</label><br>
                     <textarea id="comment-edit" name="comment"></textarea>
 
-                    <button type="button" class="close-button" onclick="closeModal('edit-modal')">
+                    <button type="button" class="okbutton" onclick="closeModal('edit-modal')">
                         Отмена
                     </button>
                     <button type="submit" id="edit-submit-button" class="modal-bt">

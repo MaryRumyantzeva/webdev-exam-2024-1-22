@@ -131,6 +131,10 @@ tr {
     margin: 2px;
 }
 
+label {
+    font-weight: bold ;
+}
+
 .modal-button {
     background-color: white;
     border: 1px solid black;
@@ -150,3 +154,34 @@ tr {
     display: none;
 }
 
+button:not(.close-button) {
+    background-color: rgb(229, 137, 160);
+    color: white;
+    padding: 10px 30px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover:not(.close-button) {
+    background-color: rgb(218, 1, 121);
+    color: white;
+}
+
+@media (max-width: 650px) {
+    .orders-container {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        gap: 0;
+    }
+
+    .orders-container fieldset {
+        width: 80%;
+    }
+
+    .form-container button {
+        width: 100%;
+    }
+}

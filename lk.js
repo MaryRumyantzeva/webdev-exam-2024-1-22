@@ -167,17 +167,23 @@ function editOrder(orderId) {
     }
     const order = orders[orderId];
     const createdAt = new Date(order.createdAt)
-    document.getElementById('date-order').disabled = true;
-    document.getElementById('date-order').innerHTML = createdAt.toLocaleString();
+    document.querySelector('#edit-form #date-order').innerHTML = createdAt.toLocaleString();
     document.getElementById('full-name-edit').value = order.fullName;
     document.getElementById('phone-edit').value = order.phone;
     document.getElementById('email-edit').value = order.email;
     document.getElementById('address-edit').value = order.deliveryAddress;
     document.getElementById('delivery-date-edit').value = order.deliveryDate;
-    document.getElementById('delivery-time-edit').value = order.deliveryTime;
-    document.getElementById('goods-view').value = order.goods.map(good => good.name).join('<br><br>');
-    document.getElementById('goods-price').value = `${order.total} ₽`;
+    document.querySelector('#edit-form #goods-view').innerHTML = order.goods.map(good => good.name).join('<br><br>');
+    document.querySelector('#edit-form #goods-price').innerHTML = `${order.total} ₽`;
     document.getElementById('comment-edit').value = order.comment;
+
+    const select = document.getElementById('delivery-time-edit');
+    const options = select.querySelectorAll('option')
+    options.forEach(option => {
+        const parsedValue = option.value.slice(0, 2) + '-' + option.value.slice(6, 8)
+        option.selected = parsedValue === order.deliveryTime
+        console.log(parsedValue, order.deliveryTime)
+    })
 
     // Заполнение товаров в заказе
     const goodsView = document.getElementById('goods-view');
@@ -205,6 +211,7 @@ function editOrder(orderId) {
 
     openModal(editModal);
 }
+
 
 
 document.addEventListener('DOMContentLoaded', loadOrders);
