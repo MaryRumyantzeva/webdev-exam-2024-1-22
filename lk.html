@@ -100,10 +100,12 @@
 
         <div id="edit-modal" class="modal-hidden">
             <div class="modal-content">
-                <button class="close-button" onclick="closeModal('edit-modal')">×</button>
+                <button type="button" class="close-button" onclick="closeModal('edit-modal')">×</button>
                 <h2>Редактирование заказа</h2>
-
+                
                 <form id="edit-form">
+                    <label for="date-order">Дата оформления</label>
+                    <p id="date-order"></p>
                     <label for="full-name-edit">Имя</label><br>
                     <input type="text" id="full-name-edit" name="full-name-edit" required /><br>
 
@@ -125,7 +127,7 @@
                         <option value="12:00-14:00">12:00-14:00</option>
                         <option value="14:00-18:00">14:00-18:00</option>
                         <option value="18:00-22:00">18:00-22:00</option>
-                    </select>
+                    </select><br>
 
                     <label>Состав заказа:</label><br>
                     <ul id="goods-view"></ul><br>
@@ -136,7 +138,7 @@
                     <label for="comment-edit">Комментарий</label><br>
                     <textarea id="comment-edit" name="comment"></textarea>
 
-                    <button class="close-button" onclick="closeModal('edit-modal')">
+                    <button type="button" class="close-button" onclick="closeModal('edit-modal')">
                         Отмена
                     </button>
                     <button type="submit" id="edit-submit-button" class="modal-bt">

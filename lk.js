@@ -166,17 +166,18 @@ function editOrder(orderId) {
         return;
     }
     const order = orders[orderId];
-    
-    document.getElementById('date-order').innerText = order.createdAt.toLocaleString();
-    document.getElementById('full-name-edit').innerText = order.fullName;
-    document.getElementById('phone-edit').innerText = order.phone;
-    document.getElementById('email-edit').innerText = order.email;
-    document.getElementById('address-edit').innerText = order.deliveryAddress;
-    document.getElementById('delivery-date-edit').innerText = order.deliveryDate;
-    document.getElementById('delivery-time-edit').innerText = order.deliveryTime;
-    document.getElementById('goods-view').innerHTML = order.goods.map(good => good.name).join('<br><br>');
-    document.getElementById('goods-price').innerText = `${order.total} ₽`;
-    document.getElementById('comment-edit').innerText = order.comment;
+    const createdAt = new Date(order.createdAt)
+    document.getElementById('date-order').disabled = true;
+    document.getElementById('date-order').innerHTML = createdAt.toLocaleString();
+    document.getElementById('full-name-edit').value = order.fullName;
+    document.getElementById('phone-edit').value = order.phone;
+    document.getElementById('email-edit').value = order.email;
+    document.getElementById('address-edit').value = order.deliveryAddress;
+    document.getElementById('delivery-date-edit').value = order.deliveryDate;
+    document.getElementById('delivery-time-edit').value = order.deliveryTime;
+    document.getElementById('goods-view').value = order.goods.map(good => good.name).join('<br><br>');
+    document.getElementById('goods-price').value = `${order.total} ₽`;
+    document.getElementById('comment-edit').value = order.comment;
 
     // Заполнение товаров в заказе
     const goodsView = document.getElementById('goods-view');
