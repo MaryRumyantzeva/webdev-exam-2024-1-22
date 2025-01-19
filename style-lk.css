@@ -177,11 +177,16 @@ button:hover:not(.close-button) {
         gap: 0;
     }
 
+    table{
+        flex-direction: column;
+        display: flex;
+    }
+
     .orders-container fieldset {
         width: 80%;
     }
 
-    .form-container button {
+    .orders-container button {
         width: 100%;
     }
 }
