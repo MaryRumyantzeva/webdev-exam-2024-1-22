@@ -27,6 +27,9 @@ document.getElementById("modal-ok").addEventListener("click", () => {
 
 function loadOrders() {
     orders = JSON.parse(localStorage.getItem('orders')) || [];
+    orders.forEach((order, index) => {
+        order.id = index;
+    })
 
     if (orders.length === 0) {
         ordersContainer.innerHTML = '<p>У вас нет заказов.</p>';
@@ -86,7 +89,7 @@ function loadOrders() {
     closeViewModalButton.addEventListener('click', () => closeModal('modal-view'));
 
     const closeEditModalButton = document.querySelector('#edit-modal').querySelector('.close-button');
-    closeEditModalButton.addEventListener('click', () => closeModal('edit-modal'));
+    closeEditModalButton.addEventListener('click', () => closeModal('modal-view'));
 }
 
 function openDeleteModal(index) {
@@ -153,41 +156,27 @@ function closeModal(modalId) {
     }
 }
 
-function generateOrderId() {
-    const orders = JSON.parse(localStorage.getItem('orders')) || [];
-    return orders.length === 0 ? 1 : Math.max(...orders.map(order => order.id)) + 1;
-}
-
-function addOrder(order) {
-    const orders = JSON.parse(localStorage.getItem('orders')) || [];
-    order.id = generateOrderId(); // Генерация ID для нового заказа
-    orders.push(order);
-    localStorage.setItem('orders', JSON.stringify(orders));
-    loadOrders();
-}
-
 function editOrder(orderId) {
-    // console.log('asdfg')
     console.log(JSON.parse(localStorage.getItem('orders')));
-
-    // const orders = JSON.parse(localStorage.getItem('orders')) || [];
-    const order = orders.find(o => o.id === orderId);
-    if (!order) {
+    const ordersID = orders.find(o => {
+        return o.id === orderId
+    });
+    if (!ordersID) {
         console.error(`Order with ID ${orderId} not found`);
         return;
     }
-
-    // Заполняем поля модального окна
-    document.getElementById('date-order').innerText = createdAt.toLocaleString();
-    document.getElementById('full-name-view').innerText = order.fullName;
-    document.getElementById('phone-view').innerText = order.phone;
-    document.getElementById('email-view').innerText = order.email;
-    document.getElementById('address-view').innerText = order.deliveryAddress;
-    document.getElementById('delivery-date-view').innerText = order.deliveryDate;
-    document.getElementById('delivery-time-view').innerText = order.deliveryTime;
+    const order = orders[orderId];
+    
+    document.getElementById('date-order').innerText = order.createdAt.toLocaleString();
+    document.getElementById('full-name-edit').innerText = order.fullName;
+    document.getElementById('phone-edit').innerText = order.phone;
+    document.getElementById('email-edit').innerText = order.email;
+    document.getElementById('address-edit').innerText = order.deliveryAddress;
+    document.getElementById('delivery-date-edit').innerText = order.deliveryDate;
+    document.getElementById('delivery-time-edit').innerText = order.deliveryTime;
     document.getElementById('goods-view').innerHTML = order.goods.map(good => good.name).join('<br><br>');
     document.getElementById('goods-price').innerText = `${order.total} ₽`;
-    document.getElementById('comment-view').innerText = order.comment;
+    document.getElementById('comment-edit').innerText = order.comment;
 
     // Заполнение товаров в заказе
     const goodsView = document.getElementById('goods-view');

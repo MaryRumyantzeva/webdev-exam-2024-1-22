@@ -100,26 +100,26 @@
 
         <div id="edit-modal" class="modal-hidden">
             <div class="modal-content">
-                <button class="close-button" >×</button>
+                <button class="close-button" onclick="closeModal('edit-modal')">×</button>
                 <h2>Редактирование заказа</h2>
 
                 <form id="edit-form">
-                    <label for="full-name-edit">Имя</label>
-                    <input type="text" id="full-name-edit" name="full_name" required />
+                    <label for="full-name-edit">Имя</label><br>
+                    <input type="text" id="full-name-edit" name="full-name-edit" required /><br>
 
-                    <label for="phone-edit">Номер телефона</label>
-                    <input type="tel" id="phone-edit" name="phone" required />
+                    <label for="phone-edit">Номер телефона</label><br>
+                    <input type="tel" id="phone-edit" name="phone-edit" required /><br>
 
-                    <label for="email-edit">Еmail</label>
-                    <input type="email" id="email-edit" name="email" required />
+                    <label for="email-edit">Еmail</label><br>
+                    <input type="email" id="email-edit" name="email" required /><br>
 
-                    <label for="address-edit">Адрес доставки</label>
-                    <input type="text" id="address-edit" name="delivery_address" required />
+                    <label for="address-edit">Адрес доставки</label><br>
+                    <input type="text" id="address-edit" name="delivery_address" required /><br>
 
-                    <label for="delivery-date-edit">Дата доставки</label>
-                    <input type="date" id="delivery-date-edit" name="delivery_date" required />
+                    <label for="delivery-date-edit">Дата доставки</label><br>
+                    <input type="date" id="delivery-date-edit" name="delivery_date" required /><br>
 
-                    <label for="time">Время доставки</label>
+                    <label for="time">Время доставки</label><br>
                     <select id="delivery-time-edit">
                         <option value="08:00-12:00">08:00-12:00</option>
                         <option value="12:00-14:00">12:00-14:00</option>
@@ -127,16 +127,16 @@
                         <option value="18:00-22:00">18:00-22:00</option>
                     </select>
 
-                    <label>Состав заказа:</label>
-                    <ul id="goods-view"></ul>
+                    <label>Состав заказа:</label><br>
+                    <ul id="goods-view"></ul><br>
 
-                    <label>Стоимость</label>
-                    <p id="goods-price"></p>
+                    <label>Стоимость</label><br>
+                    <p id="goods-price"></p><br>
 
-                    <label for="comment-edit">Комментарий</label>
+                    <label for="comment-edit">Комментарий</label><br>
                     <textarea id="comment-edit" name="comment"></textarea>
 
-                    <button class="close-button" onclick="closeModal('modal-view')">
+                    <button class="close-button" onclick="closeModal('edit-modal')">
                         Отмена
                     </button>
                     <button type="submit" id="edit-submit-button" class="modal-bt">
