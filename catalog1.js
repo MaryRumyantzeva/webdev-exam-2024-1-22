@@ -47,7 +47,7 @@ export function renderGoods(goods) {
             </div>
         `;
         categoryContainer.appendChild(goodDiv);
-        
+
         const goodInCart = cart.find(cartGood => cartGood.id === good.id);
         console.log(cart)
         if (goodInCart) {

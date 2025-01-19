@@ -183,10 +183,6 @@ input[type="email"] {
     color: white;
 }
 
-.modal.hidden-modal {
-    display: none;
-}
-
 .cart-item {
     background-color: white;
     border-radius: 35px;

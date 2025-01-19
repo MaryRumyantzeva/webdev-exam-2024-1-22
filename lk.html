@@ -31,11 +31,18 @@
     <main>
         <h1>Заказы</h1>
 
+        <div id="modal" class="modal hidden">
+            <div class="modal-content">
+                <p id="modal-text">Заказ успешно оформлен</p>
+                <button id="modal-ok" class="modal-button">Закрыть</button>
+            </div>
+        </div>
+
         <div id="orders-container" class="orders-container"></div>
 
         <div id="delete-modal" class="modal-hidden">
             <div class="modal-content">
-                <button class="close-button" onclick="openDeleteModal('delete-modal')">
+                <button class="close-button" onclick="closeModal('delete-modal')">
                     ×
                 </button>
                 <h2>Удаление заказа</h2>
@@ -85,17 +92,15 @@
 
                 <label for="comment-view">Комментарий</label>
                 <p id="comment-view"></p>
-                <button class="close-button" onclick="closeModal('modal-view')">
+                <button class="okbutton" onclick="closeModal('modal-view')">
                     Ок
                 </button>
             </div>
         </div>
 
         <div id="edit-modal" class="modal-hidden">
-            <div class="contentmodal">
-                <button class="close-button" onclick="closeModal('edit-modal')">
-                    ×
-                </button>
+            <div class="modal-content">
+                <button class="close-button" >×</button>
                 <h2>Редактирование заказа</h2>
 
                 <form id="edit-form">

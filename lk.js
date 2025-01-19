@@ -8,13 +8,22 @@ const editModal = document.getElementById("edit-modal");
 let orders = [];
 let orderIdToDelete = null;
 
-function showModal(message, type) {
-    const notification = document.createElement('div');
-    notification.className = `notification ${type}`;
-    notification.innerText = message;
-    document.body.appendChild(notification);
+// function showModal(message, type) {
+//     const notification = document.createElement('div');
+//     notification.className = `notification ${type}`;
+//     notification.innerText = message;
+//     document.body.appendChild(notification);
+// }
+function showModal(message) {
+    const modal = document.getElementById("modal");
+    const modalText = document.getElementById("modal-text");
+    modalText.textContent = message;
+    modal.classList.remove("hidden");
 }
-
+document.getElementById("modal-ok").addEventListener("click", () => {
+    const modal = document.getElementById("modal");
+    modal.classList.add("hidden");
+});
 
 function loadOrders() {
     orders = JSON.parse(localStorage.getItem('orders')) || [];
@@ -75,6 +84,9 @@ function loadOrders() {
     });
     const closeViewModalButton = document.querySelector('#modal-view').querySelector('.close-button');
     closeViewModalButton.addEventListener('click', () => closeModal('modal-view'));
+
+    // const closeEditModalButton = document.querySelector('#modal-view').querySelector('.close-button');
+    // closeEditModalButton.addEventListener('click', () => closeModal('modal-view'));
 }
 
 function openDeleteModal(index) {
@@ -85,14 +97,15 @@ function openDeleteModal(index) {
 
 function viewOrder(index) {
     const order = orders[index];
-    document.getElementById('date-order').innerText = order.date;
-    document.getElementById('full-name-view').innerText = order.name;
+    const createdAt = new Date(order.createdAt)
+    document.getElementById('date-order').innerText = createdAt.toLocaleString();
+    document.getElementById('full-name-view').innerText = order.fullName;
     document.getElementById('phone-view').innerText = order.phone;
     document.getElementById('email-view').innerText = order.email;
-    document.getElementById('address-view').innerText = order.address;
+    document.getElementById('address-view').innerText = order.deliveryAddress;
     document.getElementById('delivery-date-view').innerText = order.deliveryDate;
     document.getElementById('delivery-time-view').innerText = order.deliveryTime;
-    document.getElementById('goods-view').innerHTML = Object.values(order).map(item => `< li > ${item.name}</li > `).join('');
+    document.getElementById('goods-view').innerHTML = order.goods.map(good => good.name).join('<br><br>');
     document.getElementById('goods-price').innerText = `${order.total} ₽`;
     document.getElementById('comment-view').innerText = order.comment;
 
@@ -103,13 +116,26 @@ function viewOrder(index) {
 
 function confirmDeleteOrder() {
     if (orderIdToDelete !== null) {
-        orders = orders.filter(order => order.id !== orderIdToDelete);
+        // orders = orders.filter(order => order.id !== orderIdToDelete);
+        orders = orders.filter((order, index) => index !== orderIdToDelete);
         localStorage.setItem('orders', JSON.stringify(orders));
         loadOrders();
-        closeModal(deleteModal);
+        // closeModal(deleteModal);
+        closeModal('delete-modal');
         showModal('Заказ успешно удален');
         orderIdToDelete = null;
     }
+
+    const form = document.forms[0];
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const modal = document.getElementById("modal");
+        modal.classList.remove("hidden");
+
+        showModal("Заказ успешно оформлен");
+        updateCartPage();
+        return;
+    })
 }
 
 function openModal(modal) {
@@ -119,9 +145,53 @@ function openModal(modal) {
 
 function closeModal(modalId) {
     const modal = document.getElementById(modalId);
-    modal.classList.remove('modal-show');
-    modal.classList.add('modal-hidden');
+    if (modal) {
+        modal.classList.remove('modal-show');
+        modal.classList.add('modal-hidden');
+    } else {
+        console.error(`Modal with id ${modalId} not found`);
+    }
 }
+
+// function editOrder(orderId) {
+//     const orders = JSON.parse(localStorage.getItem('orders')) || [];
+//     const order = orders.find(o => o.id === orderId);
+//     if (!order) return;
+
+//     // Заполняем поля модального окна
+//     document.getElementById('date-order').innerText = createdAt.toLocaleString();
+//     document.getElementById('full-name-view').innerText = order.fullName;
+//     document.getElementById('phone-view').innerText = order.phone;
+//     document.getElementById('email-view').innerText = order.email;
+//     document.getElementById('address-view').innerText = order.deliveryAddress;
+//     document.getElementById('delivery-date-view').innerText = order.deliveryDate;
+//     document.getElementById('delivery-time-view').innerText = order.deliveryTime;
+//     document.getElementById('goods-view').innerHTML = order.goods.map(good => good.name).join('<br><br>');
+//     document.getElementById('goods-price').innerText = `${order.total} ₽`;
+//     document.getElementById('comment-view').innerText = order.comment;
+
+//     // Обработчик сохранения изменений
+//     const form = document.getElementById('edit-form');
+//     form.onsubmit = function (event) {
+//         event.preventDefault();
+
+//         // Обновление данных заказа
+//         order.fullName = document.getElementById('full-name-edit').value;
+//         order.phone = document.getElementById('phone-edit').value;
+//         order.email = document.getElementById('email-edit').value;
+//         order.deliveryAddress = document.getElementById('address-edit').value;
+//         order.deliveryDate = document.getElementById('delivery-date-edit').value;
+//         order.deliveryTime = document.getElementById('delivery-time-edit').value;
+//         order.comment = document.getElementById('comment-edit').value;
+
+//         // Сохранение изменений
+//         localStorage.setItem('orders', JSON.stringify(orders));
+//         loadOrders();
+//         closeModal('edit-modal');
+//     };
+
+//     openModal(editModal);
+// }
 
 
 document.addEventListener('DOMContentLoaded', loadOrders);
