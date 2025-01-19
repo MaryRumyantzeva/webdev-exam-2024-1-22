@@ -85,8 +85,8 @@ function loadOrders() {
     const closeViewModalButton = document.querySelector('#modal-view').querySelector('.close-button');
     closeViewModalButton.addEventListener('click', () => closeModal('modal-view'));
 
-    // const closeEditModalButton = document.querySelector('#modal-view').querySelector('.close-button');
-    // closeEditModalButton.addEventListener('click', () => closeModal('modal-view'));
+    const closeEditModalButton = document.querySelector('#edit-modal').querySelector('.close-button');
+    closeEditModalButton.addEventListener('click', () => closeModal('edit-modal'));
 }
 
 function openDeleteModal(index) {
@@ -153,45 +153,68 @@ function closeModal(modalId) {
     }
 }
 
-// function editOrder(orderId) {
-//     const orders = JSON.parse(localStorage.getItem('orders')) || [];
-//     const order = orders.find(o => o.id === orderId);
-//     if (!order) return;
+function generateOrderId() {
+    const orders = JSON.parse(localStorage.getItem('orders')) || [];
+    return orders.length === 0 ? 1 : Math.max(...orders.map(order => order.id)) + 1;
+}
 
-//     // Заполняем поля модального окна
-//     document.getElementById('date-order').innerText = createdAt.toLocaleString();
-//     document.getElementById('full-name-view').innerText = order.fullName;
-//     document.getElementById('phone-view').innerText = order.phone;
-//     document.getElementById('email-view').innerText = order.email;
-//     document.getElementById('address-view').innerText = order.deliveryAddress;
-//     document.getElementById('delivery-date-view').innerText = order.deliveryDate;
-//     document.getElementById('delivery-time-view').innerText = order.deliveryTime;
-//     document.getElementById('goods-view').innerHTML = order.goods.map(good => good.name).join('<br><br>');
-//     document.getElementById('goods-price').innerText = `${order.total} ₽`;
-//     document.getElementById('comment-view').innerText = order.comment;
+function addOrder(order) {
+    const orders = JSON.parse(localStorage.getItem('orders')) || [];
+    order.id = generateOrderId(); // Генерация ID для нового заказа
+    orders.push(order);
+    localStorage.setItem('orders', JSON.stringify(orders));
+    loadOrders();
+}
 
-//     // Обработчик сохранения изменений
-//     const form = document.getElementById('edit-form');
-//     form.onsubmit = function (event) {
-//         event.preventDefault();
+function editOrder(orderId) {
+    // console.log('asdfg')
+    console.log(JSON.parse(localStorage.getItem('orders')));
 
-//         // Обновление данных заказа
-//         order.fullName = document.getElementById('full-name-edit').value;
-//         order.phone = document.getElementById('phone-edit').value;
-//         order.email = document.getElementById('email-edit').value;
-//         order.deliveryAddress = document.getElementById('address-edit').value;
-//         order.deliveryDate = document.getElementById('delivery-date-edit').value;
-//         order.deliveryTime = document.getElementById('delivery-time-edit').value;
-//         order.comment = document.getElementById('comment-edit').value;
+    // const orders = JSON.parse(localStorage.getItem('orders')) || [];
+    const order = orders.find(o => o.id === orderId);
+    if (!order) {
+        console.error(`Order with ID ${orderId} not found`);
+        return;
+    }
 
-//         // Сохранение изменений
-//         localStorage.setItem('orders', JSON.stringify(orders));
-//         loadOrders();
-//         closeModal('edit-modal');
-//     };
+    // Заполняем поля модального окна
+    document.getElementById('date-order').innerText = createdAt.toLocaleString();
+    document.getElementById('full-name-view').innerText = order.fullName;
+    document.getElementById('phone-view').innerText = order.phone;
+    document.getElementById('email-view').innerText = order.email;
+    document.getElementById('address-view').innerText = order.deliveryAddress;
+    document.getElementById('delivery-date-view').innerText = order.deliveryDate;
+    document.getElementById('delivery-time-view').innerText = order.deliveryTime;
+    document.getElementById('goods-view').innerHTML = order.goods.map(good => good.name).join('<br><br>');
+    document.getElementById('goods-price').innerText = `${order.total} ₽`;
+    document.getElementById('comment-view').innerText = order.comment;
 
-//     openModal(editModal);
-// }
+    // Заполнение товаров в заказе
+    const goodsView = document.getElementById('goods-view');
+    goodsView.innerHTML = order.goods.map(good => `<li>${good.name}</li>`).join('');
+
+    // Обработчик сохранения изменений
+    const form = document.getElementById('edit-form');
+    form.onsubmit = function (event) {
+        event.preventDefault();
+
+        // Обновление данных заказа
+        order.fullName = document.getElementById('full-name-edit').value;
+        order.phone = document.getElementById('phone-edit').value;
+        order.email = document.getElementById('email-edit').value;
+        order.deliveryAddress = document.getElementById('address-edit').value;
+        order.deliveryDate = document.getElementById('delivery-date-edit').value;
+        order.deliveryTime = document.getElementById('delivery-time-edit').value;
+        order.comment = document.getElementById('comment-edit').value;
+
+        // Сохранение изменений
+        localStorage.setItem('orders', JSON.stringify(orders));
+        loadOrders();
+        closeModal('edit-modal');
+    };
+
+    openModal(editModal);
+}
 
 
 document.addEventListener('DOMContentLoaded', loadOrders);
